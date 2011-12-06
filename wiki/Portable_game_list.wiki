@@ -1,10 +1,12 @@
 #labels Featured,Phase-Support
-临时表
+=临时表=
 
 以crass支援列表作为基础扩充
 
-。。。。。。。。。。。。。。个人的力量有限，请大家继续完善吧，偶先下去了。。。。。
+---个人的力量有限，请大家继续完善吧，偶先下去了。。。。。
 
+---
+{{{
 可发现游戏列表——
 
 【support list for NScripter】
@@ -1556,9 +1558,6 @@ SYOKUSYULIEN ～淫獄の大地～
 寝盗ラレ -Naked Trance Ramble
 先生は女王様
 
-
-
-
 【support list for RealLive】
 
 【のると】http://www.nord-land.net/
@@ -1729,7 +1728,6 @@ Coming×Humming!! -カミングハミング-！（感谢緋色の欠片测试）
 神曲奏界ポリフォニカ -Memories White- エンドレスアリア（感谢Kyle测试）
 Step -二人の関係は一歩ずつ-
 
+}}}
 
 请继续完善本列表......
-
-

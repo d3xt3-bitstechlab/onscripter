@@ -1,15 +1,11 @@
-#summary One-sentence summary of this page.
 #labels Featured
-
 = Introduction =
 
-Add your content here.
 原始url：
 http://hi.baidu.com/agalgame/blog/item/8a21fef99717f804b07ec5ef.html
 
 = Details =
 
-Add your content here.  Format your content with:
 {{{
 Android Galgame and Linux Galgame
 

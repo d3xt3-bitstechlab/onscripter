@@ -361,7 +361,7 @@ int ONScripter::strspCommand()
     ai->visible = true;
     ai->is_single_line = false;
     ai->is_tight_region = false;
-    ai->is_ruby_drawable = true;
+    ai->is_ruby_drawable = sentence_font.rubyon_flag;
     setupAnimationInfo(ai, &fi);
     if ( ai->visible ) dirty_rect.add( ai->pos );
 
@@ -627,6 +627,9 @@ void ONScripter::setwindowCore()
         sentence_font.is_transparent = false;
         sentence_font.window_color[0] = sentence_font.window_color[1] = sentence_font.window_color[2] = 0xff;
     }
+
+    old_xy[0] = sentence_font.x();
+    old_xy[1] = sentence_font.y();
 }
 
 int ONScripter::setwindow3Command()
@@ -924,6 +927,8 @@ int ONScripter::saveonCommand()
 
 int ONScripter::saveoffCommand()
 {
+    if (saveon_flag && internal_saveon_flag) saveSaveFile(-1);
+    
     saveon_flag = false;
 
     return RET_CONTINUE;
@@ -943,8 +948,10 @@ int ONScripter::savegameCommand()
 
     if ( no < 0 )
         errorAndExit("savegame: save number is less than 0.");
-    else
+    else{
+        if (saveon_flag && internal_saveon_flag) saveSaveFile(-1);
         saveSaveFile( no, savestr ); 
+    }
 
     return RET_CONTINUE;
 }
@@ -1686,7 +1693,7 @@ int ONScripter::logspCommand()
 
     ai->is_single_line = false;
     ai->is_tight_region = false;
-    ai->is_ruby_drawable = true;
+    ai->is_ruby_drawable = sentence_font.rubyon_flag;
     sentence_font.is_newline_accepted = true;
     setupAnimationInfo( ai );
     sentence_font.is_newline_accepted = false;
@@ -1776,6 +1783,20 @@ int ONScripter::ldCommand()
     EffectLink *el = parseEffect(true);
     if (setEffect(el, true, true)) return RET_CONTINUE;
     while (doEffect(el));
+
+    return RET_CONTINUE;
+}
+
+int ONScripter::kinsokuCommand()
+{
+    if (script_h.compareString("on")){
+        is_kinsoku = true;
+        script_h.readLabel();
+    }
+    else if (script_h.compareString("off")){
+        is_kinsoku = false;
+        script_h.readLabel();
+    }
 
     return RET_CONTINUE;
 }
@@ -2274,6 +2295,17 @@ int ONScripter::getenterCommand()
 {
     if ( !force_button_shortcut_flag )
         getenter_flag = true;
+    
+    return RET_CONTINUE;
+}
+
+int ONScripter::getcursorpos2Command()
+{
+    script_h.readInt();
+    script_h.setInt( &script_h.current_variable, old_xy[0] );
+    
+    script_h.readInt();
+    script_h.setInt( &script_h.current_variable, old_xy[1] );
     
     return RET_CONTINUE;
 }

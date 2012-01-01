@@ -849,21 +849,13 @@ bool ONScripter::keyPressEvent( SDL_KeyboardEvent *event )
                     system_menu_mode = SYSTEM_WINDOWERASE;
             }
         }
-        else if ( useescspc_flag && event->keysym.sym == SDLK_ESCAPE ){
-            current_button_state.button  = -10;
-        }
-        else if ( !spclclk_flag && useescspc_flag && event->keysym.sym == SDLK_SPACE ){
-            current_button_state.button  = -11;
-        }
+
 		else if ( !useescspc_flag && event->keysym.sym == SDLK_m){
             //current_button_state.button  = -1;
             if (rmode_flag && event_mode & WAIT_TEXT_MODE){
                music_volume +=10 ;
                  se_volume +=10;
                  voice_volume +=10;
-//screen_surface = SDL_SetVideoMode( screen_device_width, screen_device_height, screen_bpp, DEFAULT_VIDEO_SURFACE_FLAG );
- //           repaintCommand();
-//SDL_UpdateRect( screen_surface, 0, 0, screen_width, screen_height );
              Mix_VolumeMusic( music_volume * MIX_MAX_VOLUME / 100 );
              Mix_VolumeMusic( se_volume * MIX_MAX_VOLUME / 100 );
              Mix_VolumeMusic( voice_volume * MIX_MAX_VOLUME / 100 );
@@ -903,6 +895,13 @@ else if ( !useescspc_flag && event->keysym.sym == SDLK_d){
              Mix_VolumeMusic( se_volume * MIX_MAX_VOLUME / 100 );
              Mix_VolumeMusic( voice_volume * MIX_MAX_VOLUME / 100 );
           }
+        }
+
+        else if ( useescspc_flag && event->keysym.sym == SDLK_ESCAPE ){
+            current_button_state.button  = -10;
+        }
+        else if ( !spclclk_flag && useescspc_flag && event->keysym.sym == SDLK_SPACE ){
+            current_button_state.button  = -11;
         }
         else if (((!getcursor_flag && event->keysym.sym == SDLK_LEFT) ||
                   event->keysym.sym == SDLK_h) &&

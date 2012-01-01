@@ -1,5 +1,8 @@
 package cn.natdon.onscripter;
 
+import java.util.Calendar;
+import java.util.Timer;
+
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGL11;
@@ -10,15 +13,14 @@ import javax.microedition.khronos.egl.EGLSurface;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
+import android.os.Bundle; 
 import android.view.MotionEvent;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.media.AudioManager;
-
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 
@@ -78,11 +80,14 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 
 
 class DemoGLSurfaceView extends GLSurfaceView_SDL {
+	public Context mContext;
 	public DemoGLSurfaceView(Activity context) {
 		super(context);
 		mRenderer = new DemoRenderer(context);
 		setRenderer(mRenderer);
+		mContext = context;
 	}
+		private long exitTime = 0;
 
 	@Override
 	public boolean onTouchEvent(final MotionEvent event) 
@@ -100,8 +105,17 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 			nativeMouse( (int)event.getX(), (int)event.getY(), action );
                 if(pointerCount==3)
     	        {
+			if( event.getAction() == MotionEvent.ACTION_POINTER_3_DOWN ){
+			  if((System.currentTimeMillis()-exitTime) > 2000){  
+				Toast.makeText(mContext, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+	                         exitTime = System.currentTimeMillis();  
+				    }  
+				    else{  
+				    	
+				    		exitApp();
+				        }  
+			}
 			
-                        exitApp();
     	        }
 
 		return true;

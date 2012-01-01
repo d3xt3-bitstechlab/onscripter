@@ -13,6 +13,7 @@ GUI_OBJS = ONScripter$(OBJSUFFIX) \
 	ONScripter_file$(OBJSUFFIX) \
 	ONScripter_file2$(OBJSUFFIX) \
 	ONScripter_image$(OBJSUFFIX) \
+	ONScripter_lut$(OBJSUFFIX) \
 	ONScripter_rmenu$(OBJSUFFIX) \
 	ONScripter_sound$(OBJSUFFIX) \
 	ONScripter_text$(OBJSUFFIX) \

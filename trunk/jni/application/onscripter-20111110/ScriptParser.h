@@ -51,7 +51,7 @@
 #define DEFAULT_LOOKBACK_NAME3 "doffcur.bmp"
 
 #define DEFAULT_START_KINSOKU "¡¢¡£¡¹¡»£¿£¡©`¡±¡¯¡·"
-#define DEFAULT_END_KINSOKU "¡¸¡º£¨£Û£û"
+#define DEFAULT_END_KINSOKU   "¡¸¡º£¨£Û£û"
 
 typedef unsigned char uchar3[3];
 
@@ -63,7 +63,6 @@ public:
 
     void reset();
     int open();
-    int parseLine();
     void setCurrentLabel( const char *label );
     void gosubReal( const char *label, char *next_script, bool textgosub_flag=false );
 
@@ -241,7 +240,6 @@ protected:
     bool mode_saya_flag;
     bool mode_ext_flag;
     bool force_button_shortcut_flag;
-    bool rubyon_flag;
     bool zenkakko_flag;
     bool pagetag_flag;
     int  windowchip_sprite_no;
@@ -372,6 +370,7 @@ protected:
     struct Kinsoku {
         char chr[2];
     } *start_kinsoku, *end_kinsoku;
+    bool is_kinsoku;
     int num_start_kinsoku, num_end_kinsoku;
     void setKinsoku(const char *start_chrs, const char *end_chrs, bool add);
     bool isStartKinsoku(const char *str);
@@ -435,6 +434,7 @@ protected:
         };
     } ruby_struct;
     int shade_distance[2];
+    int old_xy[2];
 
     /* ---------------------------------------- */
     /* RMenu related variables */

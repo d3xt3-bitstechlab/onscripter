@@ -23,7 +23,6 @@
 
 #include "ONScripter.h"
 #include "version.h"
-#include <android/log.h>
 
 #if defined(PSP)
 #include <pspkernel.h>
@@ -129,7 +128,6 @@ int main( int argc, char **argv )
     ons.enableButtonShortCut();
 #elif defined(ANDROID) 
     ons.enableButtonShortCut();
-	__android_log_print(ANDROID_LOG_INFO, "by ", "natdon");
 #endif
 
     // ----------------------------------------

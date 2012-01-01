@@ -315,6 +315,7 @@ bool ONScripter::executeSystemLoad()
 
         if (executeSystemYesNo( SYSTEM_LOAD, file_no )){
             current_font = &sentence_font;
+            system_menu_mode = NULL; // for fadeout in mp3stopCommand()
             if ( loadSaveFile( file_no ) )
                 return false;
 
@@ -406,6 +407,7 @@ void ONScripter::executeSystemSave()
     if ( current_button_state.button > 0 ){
         int file_no = current_button_state.button;
         if (executeSystemYesNo( SYSTEM_SAVE, file_no )){
+            if (saveon_flag && internal_saveon_flag) saveSaveFile(-1);
             saveSaveFile( file_no );
             leaveSystemCall();
         }

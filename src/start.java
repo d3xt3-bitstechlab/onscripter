@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationSet;
+import android.util.Log;
+
 
 public class start extends Activity {
 	private TimerTask task;
@@ -23,16 +25,24 @@ public class start extends Activity {
 	private View img;
 	private Random coin;
 	private boolean x;
+	private String extra;
+	private String setting;
+	private static final String SHORT_CUT_EXTRAS = "cn.natdon.onscripter";
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.start);
 		coin=new Random();
 		x=coin.nextBoolean();
-		setContentView(R.layout.start);
+
+		final Intent intent = getIntent();
+			extra = intent.getStringExtra(SHORT_CUT_EXTRAS);
+			setting = intent.getStringExtra("setting");
+		
+		//debug.put(Integer.toString(i), "onsdebug");
 		/*if(x){
 			start();
 		}*/
@@ -44,7 +54,7 @@ requestWindowFeature(Window.FEATURE_NO_TITLE);
 		{
             		end();
         		timer = new Timer();
-        		timer.schedule(task, 1920, 1920);
+        		timer.schedule(task, 1120, 1120);
 		}
 		else{
 			img = findViewById(R.id.ImageView01);
@@ -60,7 +70,11 @@ requestWindowFeature(Window.FEATURE_NO_TITLE);
 		    //execute the task   
 		
 		//img.setBackgroundColor(color.background_dark);
-		    	Intent mainIntent = new Intent(start.this, ONScripter.class);    
+		Intent mainIntent = new Intent(start.this, ONScripter.class);  
+		if(extra != null){ 
+		mainIntent.putExtra("path",extra);
+		mainIntent.putExtra("mysetting",setting);
+		}
                 start.this.startActivity(mainIntent);    
                 start.this.finish();   
 		//overridePendingTransition(Android.R.anim.fade_in,android.R.anim.fade_out);
@@ -74,7 +88,7 @@ requestWindowFeature(Window.FEATURE_NO_TITLE);
 	{
 		AnimationSet as= new AnimationSet(true);
 		AlphaAnimation me=new AlphaAnimation(1, 0);
-		me.setDuration(2000);//设置动画执行的时间（单位：毫秒）           
+		me.setDuration(1200);//设置动画执行的时间（单位：毫秒）           
         as.addAnimation(me);//将AlphaAnimation对象添加到AnimationSet当中           
         View img = findViewById(R.id.ImageView01);
         img.startAnimation(as);
@@ -88,5 +102,6 @@ requestWindowFeature(Window.FEATURE_NO_TITLE);
         View img = findViewById(R.id.ImageView01);
         img.startAnimation(as);
 	}
+
 	
 }
